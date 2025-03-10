@@ -1,0 +1,101 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 20px;
+    padding: 0;
+    
+}
+.container {
+    max-width: 90%;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+header{
+    display: flex;
+    justify-content: space-between
+}
+header button {
+    background-color: #ff5100;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+header nav h2{
+    text-align: center;
+    font-size: 30px;
+    justify-content: center;
+}
+.controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+#searchInput{
+    width: 300px;
+    border-radius: 5px;
+}
+#selectedRange{
+    border-radius: 5px;
+    margin: 5px;
+    background-color: #8b8887;
+    padding: 10px;
+
+
+}  
+
+i{
+    margin: 2px;
+}
+.controls button {
+    background-color: #8b8887;
+    color: white;
+    border: none;
+    padding: 10px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.responsive {
+    overflow-x: auto;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+th {
+    background-color: #007bff;
+    color: white;
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+button.delete {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button.edit {
+    background-color: orange;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
