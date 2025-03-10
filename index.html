@@ -8,48 +8,45 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
+    <div class="logo">
+        <h1>LICENSE MANAGMENT</h1>
+    </div>
     <div class="container">
        <header>
         <nav class="left-nav">
-            <button onclick="showAddForm()">+ ADD</button>
-            <button> <i class="fas fa-sort-amount-down-alt"></i>BULK UPLOAD</button>
-        </nav>
-        <nav class="right-nav">
-            <h2>License Management</h2>
+            <button onclick="showAddForm()" id="add">+ ADD</button>
+            <button><i class="fas fa-sort-amount-down-alt"></i> BULK UPLOAD</button>
         </nav>
        </header>
         
         <div class="controls">
-            <input type="text" id="searchInput" placeholder="Search for order ID,customer,order status or ..">
+            <input type="text" id="searchInput" placeholder="Search for order ID, customer, order status...">
             <div>
                 <select id="selectedRange" onchange="filterBySelectedRange()">
-                <option value="1-20">1-20</option>
-                <option value="21-40">21-40</option>
-                <option value="41-60">41-60</option>
-                <option value="61-80">61-80</option>
-                <option value="81-100">81-100</option>
-            </select>
-            <button onclick="refreshEntries()"><i style="font-size:12px" class="fa">&#xf021;</i></button>
-            <button>   
-                <i class="fas fa-sign-out-alt"></i> <span style="margin-left: 5px;">Export <i class="fa-solid fa-angle-down"></i></span>
-            </button>
-            
-        </div>
-
+                    <option value="1-20">1-20</option>
+                    <option value="21-40">21-40</option>
+                    <option value="41-60">41-60</option>
+                    <option value="61-80">61-80</option>
+                    <option value="81-100">81-100</option>
+                </select>
+                <button onclick="refreshEntries()"><i class="fa fa-sync"></i></button>
+                <button>   
+                    <i class="fas fa-sign-out-alt"></i> <span style="margin-left: 5px;">Export <i class="fa-solid fa-angle-down"></i></span>
+                </button>
+            </div>
         </div>
         
         <div id="addForm" class="form-container" style="display: none;">
             <h3>Add New License</h3>
             <form id="licenseForm">
-                <input type="number" id="ID" placeholder="ID Name" required>
                 <input type="text" id="licence" placeholder="Licence Name" required>
                 <input type="text" id="productKey" placeholder="Product Key" required>
                 <input type="date" id="expiration" required>
-                <input type="email" id="email" placeholder="Licensed Email" required>
-                <input type="text" id="name" placeholder="Licensed Name" required>
+                <input type="email" id="email" placeholder="Licensed TO Email" required>
+                <input type="text" id="name" placeholder="Licensed To Name" required>
                 <input type="text" id="manufacturer" placeholder="Manufacturer" required>
-                <input type="number" id="totalSeats" placeholder="Total Seats" required>
-                <input type="number" id="availableSeats" placeholder="Available Seats" required>
+                <input type="number" id="totalSeats" placeholder="Total (Seats)" required>
+                <input type="number" id="availableSeats" placeholder="Available (Seats)" required>
                 <input type="number" id="inventoryQty" placeholder="Inventory Quantity" required>
                 <button type="button" onclick="addEntry()">Save</button>
                 <button type="button" onclick="hideAddForm()">Cancel</button>
@@ -77,7 +74,19 @@
                 <tbody id="tableBody"></tbody>
             </table>
         </div>
+
+        
+        <footer class="footer">
+            <p id="entriesCount">Showing 3 of 3 items</p>
+            <div class="pagination">
+                <button id="prevPage" onclick="prevPage()" disabled>Previous</button>
+                <span id="pageNumber">1</span>
+                <button id="nextPage" onclick="nextPage()">Next</button>
+            </div>
+         
+        </footer>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>

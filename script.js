@@ -42,25 +42,39 @@ function addEntry() {
     loadEntries();
 }
 
+let currentPage = 1;
+const entriesPerPage = 10;
+
 function loadEntries() {
     let data = JSON.parse(localStorage.getItem("licenseData")) || [];
     let tableBody = document.getElementById("tableBody");
-    tableBody.innerHTML = data.map((entry, index) => `
-        <tr>
-            <td><input type="checkbox"></td>
-            <td>${entry.id}</td>
-            <td>${entry.licence}</td>
-            <td>${entry.productKey}</td>
-            <td>${entry.expiration}</td>
-            <td>${entry.email}</td>
-            <td>${entry.name}</td>
-            <td>${entry.manufacturer}</td>
-            <td>${entry.totalSeats}</td>
-            <td>${entry.availableSeats}</td>
-            <td>${entry.inventoryQty}</td>
-            <td><button onclick="deleteEntry(${index})">Delete</button></td>
-        </tr>
-    `).join("");
+    tableBody.innerHTML = "";
+    
+    let start = (currentPage - 1) * entriesPerPage;
+    let end = start + entriesPerPage;
+    let paginatedData = data.slice(start, end);
+
+    paginatedData.forEach((entry, index) => {
+        let row = `
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>${entry.id}</td>
+                <td>${entry.licence}</td>
+                <td>${entry.productKey}</td>
+                <td>${entry.expiration}</td>
+                <td>${entry.email}</td>
+                <td>${entry.name}</td>
+                <td>${entry.manufacturer}</td>
+                <td>${entry.totalSeats}</td>
+                <td>${entry.availableSeats}</td>
+                <td>${entry.inventoryQty}</td>
+                <td><button onclick="deleteEntry(${index})">Delete</button></td>
+            </tr>
+        `;
+        tableBody.innerHTML += row;
+    });
+    
+    updatePaginationInfo(data.length);
 }
 
 function deleteEntry(index) {
@@ -85,4 +99,35 @@ function filterBySelectedRange() {
 
 function refreshEntries() {
     loadEntries();
+}
+
+function updatePaginationInfo(totalEntries) {
+    let start = (currentPage - 1) * entriesPerPage + 1;
+    let end = Math.min(currentPage * entriesPerPage, totalEntries);
+
+    if (totalEntries === 0) {
+        start = 0;
+        end = 0;
+    }
+
+    document.getElementById("entriesCount").textContent = `Showing ${start}-${end} of ${totalEntries} licenses`;
+    document.getElementById("pageNumber").textContent = `Page ${currentPage}`;
+
+    document.getElementById("prevPage").disabled = currentPage === 1;
+    document.getElementById("nextPage").disabled = end >= totalEntries;
+}
+
+function prevPage() {
+    if (currentPage > 1) {
+        currentPage--;
+        loadEntries();
+    }
+}
+
+function nextPage() {
+    let totalEntries = JSON.parse(localStorage.getItem("licenseData"))?.length || 0;
+    if (currentPage * entriesPerPage < totalEntries) {
+        currentPage++;
+        loadEntries();
+    }
 }
